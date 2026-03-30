@@ -1,4 +1,4 @@
-# ComfyUI WaaS Plugin
+# ComfyUI AiGate Plugin
 
 A ComfyUI custom node plugin that provides web-based model management, cloud model library access, and a modern Vue.js frontend interface.
 
