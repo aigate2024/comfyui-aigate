@@ -18,6 +18,7 @@ browser_app.add_routes(
         web.post("/models/clear", models.api_clear_models),
         web.post("/models/refresh", models.api_refresh_models),
         web.post("/models/envs", models.api_get_envs),
+        web.post("/output/delete", models.api_delete_output_file),
         web.get("/proxy/{tail:.*}", proxy.api_proxy),
         web.post("/update/check-update", update.api_check_update),
         web.post("/update/update", update.api_update_plugin),

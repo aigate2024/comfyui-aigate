@@ -6,6 +6,8 @@ import glob
 import shutil
 import subprocess
 
+OUTPUT_ROOT = "/home/waas/ComfyUI/output/"
+
 
 def _collect_ineffective_symlinks(root_path: str) -> Dict[str, Any]:
     details: List[Dict[str, Any]] = []
@@ -76,6 +78,86 @@ def _clear_models(paths: List[str]):
                 os.unlink(p)
         except Exception:
             pass
+
+
+def _resolve_output_file(file_path: str) -> tuple[str | None, str | None]:
+    if not isinstance(file_path, str) or not file_path:
+        return None, "file path is required"
+    file_path = file_path.lstrip(path.sep)
+    if not file_path:
+        return None, "file path is required"
+    if path.isabs(file_path):
+        return None, "absolute paths are not allowed"
+
+    output_root = path.realpath(OUTPUT_ROOT)
+    candidate = path.join(output_root, file_path)
+    candidate_abs = path.abspath(candidate)
+    candidate_real = path.realpath(candidate_abs)
+
+    try:
+        if path.commonpath([output_root, candidate_real]) != output_root:
+            return None, "file must be under output directory"
+    except ValueError:
+        return None, "file must be under output directory"
+
+    if path.isdir(candidate_abs):
+        return None, "directories are not allowed"
+    if path.islink(candidate_abs):
+        return None, "symlinks are not allowed"
+    if not path.exists(candidate_abs):
+        return candidate_real, None
+    if not path.isfile(candidate_abs):
+        return None, "only regular files are allowed"
+
+    return candidate_real, None
+
+
+async def api_delete_output_file(request: web.Request) -> web.Response:
+    try:
+        payload = await request.json()
+    except Exception:
+        return web.json_response(
+            {"code": 400, "data": {}, "message": "invalid json"}, status=400
+        )
+
+    if not isinstance(payload, dict):
+        return web.json_response(
+            {"code": 400, "data": {}, "message": "bad request"}, status=400
+        )
+
+    if "paths" in payload or isinstance(payload.get("path"), list):
+        return web.json_response(
+            {"code": 400, "data": {}, "message": "only one file is allowed"},
+            status=400,
+        )
+
+    file_path = payload.get("path") or payload.get("filePath") or payload.get("fileName")
+    target, error = _resolve_output_file(file_path)
+    if error:
+        return web.json_response(
+            {"code": 400, "data": {}, "message": error}, status=400
+        )
+
+    try:
+        os.remove(target)
+    except PermissionError:
+        return web.json_response(
+            {"code": 403, "data": {}, "message": "permission denied"}, status=403
+        )
+    except FileNotFoundError:
+        pass
+    except Exception as e:
+        return web.json_response(
+            {"code": 500, "data": {}, "message": str(e)}, status=500
+        )
+
+    return web.json_response(
+        {
+            "code": 200,
+            "data": {"path": target},
+            "message": "success",
+        }
+    )
 
 
 async def api_clear_models(request: web.Request) -> web.Response:

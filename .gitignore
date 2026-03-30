@@ -3,4 +3,5 @@ __pycache__/
 collections/
 sources/
 .DS_Store
+.idea/
 download_logs/

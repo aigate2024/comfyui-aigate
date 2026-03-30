@@ -1,4 +1,4 @@
-# ComfyUI WaaS Plugin
+# ComfyUI AiGate Plugin
 
 A ComfyUI custom node plugin that provides web-based model management, cloud model library access, and a modern Vue.js frontend interface.
 
@@ -255,6 +255,20 @@ Content-Type: application/json
 
 {
   "envs": ["VAR1", "VAR2"]
+}
+```
+
+### Output Files
+
+#### Delete Output File
+Deletes one regular file under `/home/waas/Comfyui/output`. The request path must be a relative file path such as `example.png` or `a/b/c.png`; a leading slash such as `/a/b/c.png` is treated as `a/b/c.png`. The backend joins it with the output directory. If the file does not exist, the request still returns success. Directories, symlinks, paths outside the output directory, and batch deletion are rejected.
+
+```http
+POST /browser/output/delete
+Content-Type: application/json
+
+{
+  "path": "example.png"
 }
 ```
 
