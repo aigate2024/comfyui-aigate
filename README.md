@@ -16,7 +16,7 @@ ComfyUI WaaS is a ComfyUI plugin that integrates seamlessly into the ComfyUI int
 ## 🏗️ Project Structure
 
 ```
-comfyui-waas/
+comfyui-aigate/
 ├── __init__.py           # ComfyUI plugin entry point
 ├── routes/               # Python backend API routes
 │   ├── models.py        # Model management endpoints
@@ -93,7 +93,7 @@ comfyui-waas/
 2. Copy the plugin to ComfyUI's custom_nodes directory:
 ```bash
 # Assuming ComfyUI is installed in ~/comfyui/ComfyUI
-cp -r comfyui-waas ~/comfyui/ComfyUI/custom_nodes/
+cp -r comfyui-aigate ~/comfyui/ComfyUI/custom_nodes/
 ```
 
 3. Restart ComfyUI to load the plugin
@@ -106,7 +106,7 @@ If you want to modify or rebuild the Vue admin panel:
 
 1. Navigate to the Vue directory:
 ```bash
-cd ~/comfyui/ComfyUI/custom_nodes/comfyui-waas/vue
+cd ~/comfyui/ComfyUI/custom_nodes/comfyui-aigate/vue
 ```
 
 2. Install dependencies:

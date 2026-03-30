@@ -210,13 +210,13 @@ async function checkForUpdates() {
         showToast("云扉插件有新的更新版本", () => { });
 
         // Show update badge on the update button
-        const updateBadge = document.getElementById("comfyui-waas-update-badge");
+        const updateBadge = document.getElementById("comfyui-aigate-update-badge");
         if (updateBadge) {
           updateBadge.style.display = "flex";
         }
       } else {
         // Hide badge if no update needed
-        const updateBadge = document.getElementById("comfyui-waas-update-badge");
+        const updateBadge = document.getElementById("comfyui-aigate-update-badge");
         if (updateBadge) {
           updateBadge.style.display = "none";
         }
@@ -239,12 +239,12 @@ async function checkForNewModel() {
     if (response.ok) {
       const result = await response.json();
       if (result.code === 0 && result.data && result.data.length > 0) {
-        const newBadge = document.getElementById("comfyui-waas-new-model-badge");
+        const newBadge = document.getElementById("comfyui-aigate-new-model-badge");
         if (newBadge) {
           newBadge.style.display = "flex";
         }
       } else {
-        const newBadge = document.getElementById("comfyui-waas-new-model-badge");
+        const newBadge = document.getElementById("comfyui-aigate-new-model-badge");
         if (newBadge) {
           newBadge.style.display = "none";
         }
@@ -311,7 +311,7 @@ app.registerExtension({
     // 自动加载 CSS
     const link = document.createElement("link");
     link.rel = "stylesheet";
-    link.href = "/extensions/comfyui-waas/waas.css";
+    link.href = "/extensions/comfyui-aigate/waas.css";
     document.head.appendChild(link);
 
     const browserDialog = new BrowserDialog();
@@ -326,19 +326,19 @@ app.registerExtension({
     checkForNewModel();
 
     function showDropdown() {
-      document.getElementById("comfyui-waas-dropdown").style.height = '164px';
-      document.getElementById("comfyui-waas-dropdown").style.paddingTop = '4px'
-      document.getElementById("comfyui-waas-dropdown").style.paddingBottom = '20px'
+      document.getElementById("comfyui-aigate-dropdown").style.height = '164px';
+      document.getElementById("comfyui-aigate-dropdown").style.paddingTop = '4px'
+      document.getElementById("comfyui-aigate-dropdown").style.paddingBottom = '20px'
     }
 
     function hideDropdown() {
-      document.getElementById("comfyui-waas-dropdown").style.height = 0;
-      document.getElementById("comfyui-waas-dropdown").style.paddingTop = 0
-      document.getElementById("comfyui-waas-dropdown").style.paddingBottom = 0
+      document.getElementById("comfyui-aigate-dropdown").style.height = 0;
+      document.getElementById("comfyui-aigate-dropdown").style.paddingTop = 0
+      document.getElementById("comfyui-aigate-dropdown").style.paddingBottom = 0
     }
 
     function toggleDropdown() {
-      if (document.getElementById("comfyui-waas-dropdown").style.height === '164px') {
+      if (document.getElementById("comfyui-aigate-dropdown").style.height === '164px') {
         hideDropdown()
       } else {
         showDropdown()
@@ -346,7 +346,7 @@ app.registerExtension({
     }
 
     const btn1 = $el("button", {
-      className: "comfyui-waas-dropdown-btn",
+      className: "comfyui-aigate-dropdown-btn",
       textContent: "云扉公模库",
       title: "收入大量常用模型，可自主选择同步",
       style: {
@@ -359,7 +359,7 @@ app.registerExtension({
     });
 
     const btn2 = $el("button", {
-      className: "comfyui-waas-dropdown-btn",
+      className: "comfyui-aigate-dropdown-btn",
       textContent: "云扉共享盘",
       title: "通过云扉OS使用，可快速分享私有模型，对方无需下载",
       onclick: async (event) => {
@@ -414,7 +414,7 @@ app.registerExtension({
     });
 
     const btn3 = $el("button", {
-      className: "comfyui-waas-dropdown-btn",
+      className: "comfyui-aigate-dropdown-btn",
       textContent: "刷新models",
       title: "自主下载/上传模型后，comfyui内找不到模型时，点此按钮",
       onclick: async (event) => {
@@ -458,7 +458,7 @@ app.registerExtension({
     });
 
     const updateBadge = $el("div", {
-      id: "comfyui-waas-update-badge",
+      id: "comfyui-aigate-update-badge",
       style: {
         position: "absolute",
         top: "-4px",
@@ -480,7 +480,7 @@ app.registerExtension({
     });
 
     const updateBtn = $el("button", {
-      className: "comfyui-waas-dropdown-btn",
+      className: "comfyui-aigate-dropdown-btn",
       textContent: "更新插件",
       title: "检查并更新插件到最新版本",
       style: {
@@ -502,7 +502,7 @@ app.registerExtension({
               showToast(result.message, () => { });
 
               // Hide badge after successful update
-              const updateBadge = document.getElementById("comfyui-waas-update-badge");
+              const updateBadge = document.getElementById("comfyui-aigate-update-badge");
               if (updateBadge) {
                 updateBadge.style.display = "none";
               }
@@ -540,7 +540,7 @@ app.registerExtension({
     });
 
     const tip = $el("div", {
-      className: "comfyui-waas-tip",
+      className: "comfyui-aigate-tip",
     }, [
       "初次使用ComfyUI镜像建议同步云扉公模库所有模型，",
       docLink,
@@ -548,8 +548,8 @@ app.registerExtension({
         textContent: "关闭",
         onclick: (event) => {
           event.stopPropagation();
-          // 关闭comfyui-waas-tip
-          const tip = document.querySelector('.comfyui-waas-tip');
+          // 关闭comfyui-aigate-tip
+          const tip = document.querySelector('.comfyui-aigate-tip');
           if (tip) {
             tip.remove();
           }
@@ -558,7 +558,7 @@ app.registerExtension({
     ]);
 
     const newModelBadge = $el("div", {
-      id: "comfyui-waas-new-model-badge",
+      id: "comfyui-aigate-new-model-badge",
       style: {
         position: "absolute",
         top: "72px",
@@ -580,10 +580,10 @@ app.registerExtension({
     });
 
     const floatBtn = $el("div", {
-      id: "comfyui-waas-btn",
+      id: "comfyui-aigate-btn",
     }, [
       $el("div", {
-        id: "comfyui-waas-logo",
+        id: "comfyui-aigate-logo",
         onclick: () => {
           // 👉 加判断：拖拽时不触发点击
           if (isDragging) {
@@ -593,14 +593,14 @@ app.registerExtension({
         }
       }, [tip, newModelBadge]),
       $el("div", {
-        id: "comfyui-waas-dropdown",
+        id: "comfyui-aigate-dropdown",
       }, [
         btn1,
         btn2,
         btn3,
         updateBtn,
         $el("button", {
-          className: "comfyui-waas-dropdown-btn",
+          className: "comfyui-aigate-dropdown-btn",
           textContent: "收起",
           onclick: (event) => {
             hideDropdown()

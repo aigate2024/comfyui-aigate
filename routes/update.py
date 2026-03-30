@@ -6,7 +6,7 @@ from aiohttp import web
 
 async def api_check_update(request: web.Request) -> web.Response:
     try:
-        plugin_dir = os.path.expanduser("~/comfyui/ComfyUI/custom_nodes/comfyui-waas")
+        plugin_dir = os.path.expanduser("~/comfyui/ComfyUI/custom_nodes/comfyui-aigate")
 
         # 先从远程获取最新信息
         fetch_result = subprocess.run(
@@ -84,7 +84,7 @@ async def api_check_update(request: web.Request) -> web.Response:
 async def api_update_plugin(request: web.Request) -> web.Response:
     try:
         # Change to the plugin directory
-        plugin_dir = os.path.expanduser("~/comfyui/ComfyUI/custom_nodes/comfyui-waas")
+        plugin_dir = os.path.expanduser("~/comfyui/ComfyUI/custom_nodes/comfyui-aigate")
 
         # Fetch latest changes
         fetch_result = subprocess.run(

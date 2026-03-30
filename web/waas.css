@@ -1,4 +1,4 @@
-#comfyui-waas-btn {
+#comfyui-aigate-btn {
 	position: fixed;
 	top: 155px;
 	left: 80px;
@@ -11,7 +11,7 @@
 	box-shadow: 0 0 10px #888;
 }
 
-#comfyui-waas-logo {
+#comfyui-aigate-logo {
 	position: relative;
 	width: 80px;
 	height: 80px;
@@ -24,7 +24,7 @@
 	border-radius: 40px;
 }
 
-.comfyui-waas-tip {
+.comfyui-aigate-tip {
 	position: absolute;
 	left: -66px;
 	top: -105px;
@@ -39,20 +39,20 @@
 	font-size: 12px;
 }
 
-.comfyui-waas-tip>button {
+.comfyui-aigate-tip>button {
 	position: absolute;
 	top: 2px;
 	right: 2px;
 }
 
-#comfyui-waas-dropdown {
+#comfyui-aigate-dropdown {
 	width: 80px;
 	overflow: hidden;
 	transition: height 0.3s ease-in-out;
 	border-radius: 0 0 40px 40px;
 }
 
-.comfyui-waas-dropdown-btn {
+.comfyui-aigate-dropdown-btn {
 	height: 30px;
 	font-size: 13px;
 	background-color: #363636 !important;
@@ -65,7 +65,7 @@
 	border-right: none;
 }
 
-.comfyui-waas-dropdown-btn:hover {
+.comfyui-aigate-dropdown-btn:hover {
 	color: #0EA1FF !important;
 }
 
