@@ -258,20 +258,6 @@ Content-Type: application/json
 }
 ```
 
-### Output Files
-
-#### Delete Output File
-Deletes one regular file under `/home/waas/Comfyui/output`. The request path must be a relative file path such as `example.png` or `a/b/c.png`; a leading slash such as `/a/b/c.png` is treated as `a/b/c.png`. The backend joins it with the output directory. If the file does not exist, the request still returns success. Directories, symlinks, paths outside the output directory, and batch deletion are rejected.
-
-```http
-POST /browser/output/delete
-Content-Type: application/json
-
-{
-  "path": "example.png"
-}
-```
-
 ### Update Management
 
 #### Check for Updates
